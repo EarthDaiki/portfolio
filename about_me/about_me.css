@@ -1,0 +1,43 @@
+.introduction-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.introduction-container img {
+    width: 300px;
+    height: auto;
+    border-radius: 3%;
+}
+
+#education-experience {
+    display: flex;
+    gap: 50px;
+}
+
+.education-container,
+.experience-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#education-experience h3 {
+    margin: 0px;
+}
+
+#education-experience p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.freetime-container {
+    width: 50%;
+    margin: 0 auto;
+}
