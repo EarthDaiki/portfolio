@@ -9,13 +9,171 @@
     <title>Daiki's Portfolio</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="work.css">
+    <link rel="stylesheet" href="/work/detailed_work.css">
     <link rel="stylesheet" href="/root/root.css">
 </head>
 <body class="work-page">
     <header id="header-container"></header>
 
     <main>
+        <h1>Security Camera</h1>
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Real-time security camera system using Raspberry Pi</li>
+                    <li>Streams video to remote viewers via WebRTC</li>
+                    <li>Low-latency peer-to-peer communication (no cloud dependency)</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Real-time video streaming (low latency)</li>
+                    <li>WebRTC-based peer-to-peer communication</li>
+                    <li>STUN/TURN fallback for NAT traversal</li>
+                    <li>Secure connection using mTLS</li>
+                    <li>Multi-client viewer support</li>
+                    <li>Raspberry Pi camera integration</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Backend:</strong> Python (aiohttp, aiortc)</li>
+                    <li><strong>Streaming:</strong> WebRTC (STUN / TURN)</li>
+                    <li><strong>Hardware:</strong> Raspberry Pi Zero 2W + Camera</li>
+                    <li><strong>Media:</strong> FFmpeg / libcamera</li>
+                    <li><strong>Security:</strong> mTLS authentication</li>
+                    <li><strong>Infra:</strong> Docker (coturn), AWS</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="architecture-container">
+            <h3 class="title">Architecture / How It Works</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>Flow: </h3>
+                    <ul>
+                        <li>Capture video via libcamera</li>
+                        <li>Process and stream with WebRTC</li>
+                        <li>Signal exchange via WebSocket (SDP / ICE)</li>
+                        <li>P2P connection between camera and viewer</li>
+                        <li>Fallback to TURN when direct fails</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>Key design: </h3>
+                    <ul>
+                        <li>Custom signaling protocol</li>
+                        <li>Low-latency media pipeline</li>
+                        <li>Signaling / media separation</li>
+                        <li>Queue-based frame handling</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="challenges-container">
+            <h3 class="title">Challenges & Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① High latency on Raspberry Pi Zero 2W</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>FFmpeg processing caused significant delay due to limited CPU</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Removed FFmpeg, streamed raw H264 directly</li>
+                            <li>Reduced CPU usage and achieved low latency</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>② NAT traversal failure</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Direct P2P connection often failed across networks</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Implemented TURN server (coturn with Docker)</li>
+                            <li>Configured UDP/TCP/TLS relay</li>
+                            <li>Verified ICE candidate selection via stats</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>③ Secure device authentication</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Needed to ensure only authorized cameras can connect</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Implemented mTLS authentication</li>
+                            <li>Parsed client certificate (CN) to identify camera devices</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>④ Separated signaling and media paths</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Needed a trusted client IP for IP-based access control</li>
+                            <li>Load balancer limitations made TURN/UDP unsuitable for the same path</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Used AWS ALB for signaling (HTTP/WebSocket)</li>
+                            <li>Extracted reliable client IP via X-Forwarded-For for IP-based access control</li>
+                            <li>Allowed direct TURN server access for low-latency UDP media streaming</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Built a fully functional low-latency security camera system capable of streaming from embedded devices over the internet.</li>
+                    <li>Gained deep understanding of real-time communication, networking, and system optimization under hardware constraints.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>GitHub: (For security purpose, Git Repo is not available.)</li>
+                    <li>Demo Video: (For security purpose, demo video is not available.)</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
     </main>
 
     <footer class="site-footer">

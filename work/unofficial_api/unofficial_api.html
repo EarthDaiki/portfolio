@@ -9,13 +9,225 @@
     <title>Daiki's Portfolio</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="work.css">
+    <link rel="stylesheet" href="/work/detailed_work.css">
     <link rel="stylesheet" href="/root/root.css">
 </head>
 <body class="work-page">
     <header id="header-container"></header>
 
     <main>
+        <h1>Reverse Engineering & API Analysis</h1>
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Analyzed real-world platforms (Instagram, Spotify, YouTube) through unofficial APIs</li>
+                    <li>Reverse engineered request/response structures and authentication flows</li>
+                    <li>Explored how modern applications communicate securely over networks</li>
+                    <li>Focused on understanding system design, not bypassing restrictions</li>
+                    <li>Built custom Python applications using reconstructed unofficial APIs</li>
+                    <li>Designed a workflow to transform unstructured API responses into meaningful insights</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Network traffic analysis using browser developer tools</li>
+                    <li>Reconstruction of internal API requests</li>
+                    <li>Authentication flow analysis (tokens, headers, cookies)</li>
+                    <li>Understanding of rate limiting and anti-abuse systems</li>
+                    <li>TLS and certificate validation behavior analysis</li>
+                    <li>Developed Python clients to interact with unofficial APIs</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Languages:</strong> Python, JavaScript</li>
+                    <li><strong>Tools:</strong> Chrome DevTools, proxy tools</li>
+                    <li><strong>Networking:</strong> HTTP/HTTPS, Web APIs</li>
+                    <li><strong>Security:</strong> TLS, certificate validation</li>
+                    <li><strong>Environment:</strong> Desktop / Mobile testing environments</li>
+                    <li><strong>API Clients:</strong> Python (requests, custom scripts)</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="architecture-container">
+            <h3 class="title">Architecture / How It Works</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>Flow: </h3>
+                    <ul>
+                        <li>Capture network requests from real applications</li>
+                        <li>Analyze headers, payloads, and authentication tokens</li>
+                        <li>Reconstruct API calls manually</li>
+                        <li>Validate responses and replicate behavior</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>Key design: </h3>
+                    <ul>
+                        <li>Token-based authentication systems</li>
+                        <li>Request signing and validation</li>
+                        <li>Pagination and data fetching strategies</li>
+                        <li>Backend optimization patterns</li>
+                        <li>Built data analysis tools using unofficial APIs (content extraction, visualization)</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="challenges-container">
+            <h3 class="title">Challenges & Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① Understanding undocumented APIs</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>No official documentation available</li>
+                            <li>Complex and changing request structures</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Analyzed network traffic using DevTools</li>
+                            <li>Identified patterns in request/response formats</li>
+                            <li>Reconstructed APIs manually</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="element">
+                    <h4>② Authentication and request validation</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Requests required specific headers, tokens, and session data</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Studied how authentication tokens are generated and used</li>
+                            <li>Reproduced valid request structures</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="element">
+                    <h4>③ TLS and secure communication analysis</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Needed to understand how mobile apps enforce secure connections</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Explored TLS handshake and certificate validation behavior</li>
+                            <li>Used controlled environments to study trust models</li>
+                            <li>Learned how improper validation leads to vulnerabilities</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="element">
+                    <h4>④ Security and anti-abuse mechanisms</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Platforms implement protections against bots and misuse</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Observed rate limiting and request validation strategies</li>
+                            <li>Understood importance of secure API design</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>⑤ Building applications using unofficial APIs</h4>
+                
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>No SDK or official support for interacting with these APIs</li>
+                            <li>Requests required precise headers, tokens, and timing</li>
+                        </ul>
+                    </div>
+                
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Implemented custom Python clients using reconstructed requests</li>
+                            <li>Handled authentication tokens, headers, and session management</li>
+                            <li>Built scripts to automate data retrieval and interaction with APIs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>⑥ Building a data analysis tool using unofficial APIs</h4>
+                
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Raw API data was complex and not structured for analysis</li>
+                            <li>Needed a way to visualize user activity and relationships</li>
+                        </ul>
+                    </div>
+                
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Developed a Python-based analysis tool using reconstructed API endpoints</li>
+                            <li>Downloaded content such as posts, reels, stories, and highlights</li>
+                            <li>Extracted and visualized location data from user posts on a map</li>
+                            <li>Parsed story mentions and visualized relationships between users</li>
+                            <li>Organized data into DataFrames for sorting (likes, comments, etc.)</li>
+                            <li>Analyzed mutual vs non-mutual followers through structured datasets</li>
+                            <li>Exported analysis results as CSV for further use</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Developed strong understanding of how real-world systems and APIs work internally</li>
+                    <li>Gained practical experience in network analysis and debugging</li>
+                    <li>Learned security principles used in production systems</li>
+                    <li>Applied insights to build more robust and secure applications</li>
+                    <li>Built working applications that interact with real-world systems using unofficial APIs</li>
+                    <li>Built a full data pipeline from raw API data to structured analysis and visualization</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>GitHub: (This project is no longer actively maintained, but demonstrates key concepts and implementations)</li>
+                    <li>Demo Video:</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
     </main>
 
     <footer class="site-footer">

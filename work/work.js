@@ -27,7 +27,7 @@ const works = [
         tech: ["python", "aws", "spotify"]
     },
     {
-        title: "Unofficial API",
+        title: "Reverse Engineering & API Analysis",
         img: "/images/Unofficial_API/thumbnail.png",
         href: "/work/unofficial_api/unofficial_api.html",
         tech: ["python"]
