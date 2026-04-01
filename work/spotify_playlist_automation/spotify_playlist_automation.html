@@ -1,28 +1,197 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <title>Daiki's Portfolio</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="work.css">
+    <link rel="stylesheet" href="/work/detailed_work.css">
     <link rel="stylesheet" href="/root/root.css">
 </head>
 <body class="work-page">
     <header id="header-container"></header>
 
     <main>
+        <h1>Spotify Playlist Automation</h1>
+
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Developed a serverless Spotify playlist automation system using AWS Lambda.</li>
+                    <li>Designed the application to retrieve top tracks and top artists for multiple users and update playlists automatically.</li>
+                    <li>Implemented persistent state management with Amazon S3 for user metadata, playlist information, and Spotify OAuth cache files.</li>
+                    <li>Enabled scheduled execution through AWS EventBridge to support fully automated periodic updates.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Multi-user playlist management within a single Lambda-based workflow.</li>
+                    <li>Automatic creation and update of playlists based on top tracks.</li>
+                    <li>Automatic creation and update of playlists based on top artists' tracks.</li>
+                    <li>Support for short-term, medium-term, and long-term Spotify listening ranges.</li>
+                    <li>Persistent playlist metadata storage using Amazon S3.</li>
+                    <li>OAuth token cache management designed for stateless serverless execution.</li>
+                    <li>Scheduled playlist refresh through AWS EventBridge.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Language:</strong> Python</li>
+                    <li><strong>Cloud Services:</strong> AWS Lambda, Amazon S3, Amazon EventBridge</li>
+                    <li><strong>API Integration:</strong> Spotify Web API</li>
+                    <li><strong>Libraries:</strong> Spotipy, boto3</li>
+                    <li><strong>Authentication:</strong> Spotify OAuth with cached access and refresh tokens</li>
+                    <li><strong>Architecture:</strong> Serverless, modular Python application design</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="architecture-container">
+            <h3 class="title">Architecture / Workflow</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>Processing Flow:</h3>
+                    <ul>
+                        <li>AWS Lambda initiates the playlist update workflow.</li>
+                        <li>User configuration and playlist metadata are loaded from Amazon S3.</li>
+                        <li>Each user is authenticated using a Spotify OAuth cache file stored in S3.</li>
+                        <li>Top tracks and top artists data are retrieved from the Spotify Web API.</li>
+                        <li>Relevant playlists are created or updated based on the retrieved listening data.</li>
+                        <li>Updated playlist URIs and state information are written back to S3.</li>
+                        <li>The workflow is triggered automatically on a defined schedule through AWS EventBridge.</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>Design Considerations:</h3>
+                    <ul>
+                        <li>Separated orchestration, playlist processing, JSON state handling, and S3 operations into dedicated modules.</li>
+                        <li>Used Amazon S3 as a persistence layer to compensate for AWS Lambda's stateless execution model.</li>
+                        <li>Implemented reusable token cache handling to support multiple Spotify users efficiently.</li>
+                        <li>Designed the system to scale through configuration updates rather than structural code changes.</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="challenges-container">
+            <h3 class="title">Challenges &amp; Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① Maintaining authentication in a serverless environment</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>AWS Lambda does not provide persistent local storage suitable for retaining Spotify OAuth cache files across executions.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Implemented a custom S3-based cache handler for Spotify authentication tokens.</li>
+                            <li>Stored each user's cache file as <code>.cache-USER_ID</code> in Amazon S3 to preserve authentication state between executions.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>② Supporting multiple users within one automation system</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>The application needed to support multiple users, each with separate credentials, token caches, and playlist metadata.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Used a user list JSON file in Amazon S3 to drive processing dynamically.</li>
+                            <li>Mapped credentials through environment variables such as <code>E&lt;USER_ID&gt;ClientId</code>, <code>E&lt;USER_ID&gt;ClientSecret</code>, and <code>E&lt;USER_ID&gt;RedirectUrl</code>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>③ Synchronizing playlist state across executions</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>The Lambda function required a reliable mechanism to track which playlists already existed for each user and listening range.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Stored playlist URIs in a structured <code>playlists_info.json</code> file in Amazon S3.</li>
+                            <li>Initialized missing user entries automatically and updated playlist metadata after each successful run.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>④ Updating playlists efficiently from external API data</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Playlist contents change over time, requiring efficient synchronization while operating within API and execution constraints.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Compared previous and current track URIs to reduce unnecessary update operations.</li>
+                            <li>Separated top tracks logic from top artists tracks logic to improve maintainability and simplify future extension.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Developed a serverless automation system that updates Spotify playlists for multiple users without manual intervention.</li>
+                    <li>Improved operational efficiency by eliminating repetitive playlist maintenance through scheduled execution.</li>
+                    <li>Strengthened practical experience in cloud architecture, OAuth-based authentication, state persistence, and API-driven automation.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>GitHub: Available upon request</li>
+                    <li>Demo: AWS Lambda-based automation project</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
     </main>
 
     <footer class="site-footer">
         <p>&copy; 2026 Daiki's Portfolio</p>
     </footer>
 
-    <!-- JS -->
     <script src="/root/header.js"></script>
 </body>
 </html>

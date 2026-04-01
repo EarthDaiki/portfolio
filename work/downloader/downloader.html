@@ -1,28 +1,219 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <title>Daiki's Portfolio</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="work.css">
+    <link rel="stylesheet" href="/work/detailed_work.css">
     <link rel="stylesheet" href="/root/root.css">
 </head>
+
 <body class="work-page">
-    <header id="header-container"></header>
+<header id="header-container"></header>
 
-    <main>
-    </main>
+<main>
+    <h1>Video Downloader</h1>
 
-    <footer class="site-footer">
-        <p>&copy; 2026 Daiki's Portfolio</p>
-    </footer>
+    <!-- Overview -->
+    <section class="overview-container">
+        <h3 class="title">Overview</h3>
+        <div class="text-section">
+            <ul>
+                <li>Developed a Python-based video downloader supporting both direct media files and segmented streaming sources.</li>
+                <li>Designed to handle unreliable network conditions through retry mechanisms and fault-tolerant download strategies.</li>
+                <li>Implemented asynchronous processing and media reconstruction using FFmpeg to ensure efficient and consistent output generation.</li>
+            </ul>
+        </div>
+        <hr class="border-line">
+    </section>
 
-    <!-- JS -->
-    <script src="/root/header.js"></script>
+    <!-- Key Features -->
+    <section class="key-features-container">
+        <h3 class="title">Key Features</h3>
+        <div class="text-section">
+            <ul>
+                <li>Supports both single-file MP4 downloads and segmented media streams.</li>
+                <li>Implements asynchronous parallel downloads to improve throughput.</li>
+                <li>Includes retry logic and timeout handling for network resilience.</li>
+                <li>Performs validation and reuse of previously downloaded segments.</li>
+                <li>Normalizes inconsistent file extensions prior to processing.</li>
+                <li>Uses FFmpeg for efficient segment concatenation without re-encoding.</li>
+                <li>Automatically cleans up temporary files after successful execution.</li>
+            </ul>
+        </div>
+        <hr class="border-line">
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-stack-container">
+        <h3 class="title">Tech Stack</h3>
+        <div class="text-section">
+            <ul>
+                <li><strong>Language:</strong> Python</li>
+                <li><strong>Networking:</strong> requests, aiohttp</li>
+                <li><strong>Concurrency:</strong> asyncio, aiofiles</li>
+                <li><strong>Media Processing:</strong> FFmpeg</li>
+                <li><strong>Focus Areas:</strong> asynchronous processing, fault tolerance, data integrity</li>
+            </ul>
+        </div>
+        <hr class="border-line">
+    </section>
+
+    <!-- Architecture -->
+    <section class="architecture-container">
+        <h3 class="title">Architecture / Workflow</h3>
+        <div class="text-section">
+
+            <div class="element">
+                <h3>Processing Flow:</h3>
+                <ul>
+                    <li>Initialize output and temporary directories.</li>
+                    <li>Determine input type (single media file or segmented stream).</li>
+                    <li>Execute direct download or concurrent segmented downloads.</li>
+                    <li>Validate existing files and skip completed segments.</li>
+                    <li>Generate FFmpeg-compatible concat list.</li>
+                    <li>Merge segments into a final MP4 output file.</li>
+                </ul>
+            </div>
+
+            <div class="element">
+                <h3>Design Considerations:</h3>
+                <ul>
+                    <li>Separated direct download and segmented processing logic to improve maintainability.</li>
+                    <li>Controlled concurrency using semaphores to prevent resource saturation.</li>
+                    <li>Ensured fault tolerance through retry mechanisms and partial recovery support.</li>
+                    <li>Maintained data integrity during reconstruction using deterministic file ordering.</li>
+                </ul>
+            </div>
+
+        </div>
+        <hr class="border-line">
+    </section>
+
+    <!-- Challenges -->
+    <section class="challenges-container">
+        <h3 class="title">Challenges & Solutions</h3>
+        <div class="text-section">
+
+            <div class="element">
+                <h4>① Supporting heterogeneous media sources</h4>
+                <div class="child-element">
+                    <h4>Problem:</h4>
+                    <ul>
+                        <li>Media sources varied between single-file downloads and segmented transport stream formats.</li>
+                    </ul>
+                </div>
+                <div class="child-element">
+                    <h4>Solution:</h4>
+                    <ul>
+                        <li>Implemented distinct processing pipelines and automated input classification.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="element">
+                <h4>② Balancing performance and network stability</h4>
+                <div class="child-element">
+                    <h4>Problem:</h4>
+                    <ul>
+                        <li>Sequential downloads were inefficient, while excessive concurrency caused instability.</li>
+                    </ul>
+                </div>
+                <div class="child-element">
+                    <h4>Solution:</h4>
+                    <ul>
+                        <li>Introduced controlled asynchronous execution using semaphores and connection limits.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="element">
+                <h4>③ Handling unreliable network conditions</h4>
+                <div class="child-element">
+                    <h4>Problem:</h4>
+                    <ul>
+                        <li>Frequent request failures required robust recovery mechanisms.</li>
+                    </ul>
+                </div>
+                <div class="child-element">
+                    <h4>Solution:</h4>
+                    <ul>
+                        <li>Implemented retry strategies with timeout handling and error isolation.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="element">
+                <h4>④ Reconstructing valid media output</h4>
+                <div class="child-element">
+                    <h4>Problem:</h4>
+                    <ul>
+                        <li>Segment files contained inconsistent or misleading extensions.</li>
+                    </ul>
+                </div>
+                <div class="child-element">
+                    <h4>Solution:</h4>
+                    <ul>
+                        <li>Normalized file formats and merged segments using FFmpeg concat protocol.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="element">
+                <h4>⑤ Avoiding redundant downloads</h4>
+                <div class="child-element">
+                    <h4>Problem:</h4>
+                    <ul>
+                        <li>Restarting interrupted downloads resulted in unnecessary data transfer.</li>
+                    </ul>
+                </div>
+                <div class="child-element">
+                    <h4>Solution:</h4>
+                    <ul>
+                        <li>Validated existing segments and resumed processing without re-downloading valid data.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <hr class="border-line">
+    </section>
+
+    <!-- Result -->
+    <section class="result-container">
+        <h3 class="title">Result / Outcome</h3>
+        <div class="text-section">
+            <ul>
+                <li>Developed a reliable media downloader capable of handling diverse streaming formats.</li>
+                <li>Improved download performance through asynchronous processing and concurrency control.</li>
+                <li>Demonstrated strong understanding of network programming, error handling, and media processing pipelines.</li>
+            </ul>
+        </div>
+        <hr class="border-line">
+    </section>
+
+    <!-- Links -->
+    <section class="demo-container">
+        <h3 class="title">Demo / Links</h3>
+        <div class="text-section">
+            <ul>
+                <li>GitHub: This project is no longer actively maintained, but demonstrates key concepts and implementations.</li>
+                <li>Demo: Available upon request</li>
+            </ul>
+        </div>
+        <hr class="border-line">
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 Daiki's Portfolio</p>
+</footer>
+
+<script src="/root/header.js"></script>
 </body>
 </html>
