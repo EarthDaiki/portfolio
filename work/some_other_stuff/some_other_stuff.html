@@ -9,7 +9,7 @@
     <title>Daiki's Portfolio</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="work.css">
+    <link rel="stylesheet" href="/work/detailed_work.css">
     <link rel="stylesheet" href="/root/root.css">
 </head>
 <body class="work-page">
@@ -20,6 +20,12 @@
 
         <section class="pytorch-container">
             <h3 class="title">PyTorch Iris Classification</h3>
+            <section class="images-section">
+                <button class="prev">&#10094;</button>
+                <div class="images-container" data-project="pytorch">
+                </div>
+                <button class="next">&#10095;</button>
+            </section>
             <div class="text-section">
                 <ul>
                     <li>Built a simple neural network in PyTorch to classify the Iris dataset.</li>
@@ -31,11 +37,17 @@
 
         <section class="yolo-container">
             <h3 class="title">Training a Face Detection Model with YOLO</h3>
+            <section class="images-section">
+                <button class="prev">&#10094;</button>
+                <div class="images-container" data-project="yolo">
+                </div>
+                <button class="next">&#10095;</button>
+            </section>
             <div class="text-section">
                 <ul>
                     <li>Built a face detection model using YOLO to detect human faces in images.</li>
                     <li>Collected image data through web scraping and prepared a dataset based on diverse samples.</li>
-                    <li>Then carried out annotation, model training, and inference, gaining hands-on experience with the full workflow of an object detection task.</li>
+                    <li>Carried out annotation, model training, and inference, gaining hands-on experience with the full workflow of an object detection task.</li>
                 </ul>
             </div>
             <hr class="border-line">
@@ -48,5 +60,6 @@
 
     <!-- JS -->
     <script src="/root/header.js"></script>
+    <script src="/work/detailed_work.js"></script>
 </body>
 </html>

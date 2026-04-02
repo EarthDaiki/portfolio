@@ -107,7 +107,7 @@ function createWorkTemplate() {
         const a = document.createElement("a");
         a.className = "work-link";
         a.href = work.href;
-        a.target = "_blank";
+        // a.target = "_blank";
 
         if (index % 2 === 0) {
             a.classList.add("left");
