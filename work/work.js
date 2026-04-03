@@ -4,13 +4,13 @@ window.addEventListener("resize", adjustZigZag);
 const works = [
     {
       title: "RPG Game",
-      img: "/images/spotify/spotify_scrshot.png",
+      img: "",
       href: "/work/rpg_game/rpg_game.html",
       tech: ["ue", "cpp"]
     },
     {
         title: "Old House",
-        img: "/images/spotify/spotify_scrshot.png",
+        img: "",
         href: "/work/old_house/old_house.html",
         tech: ["ue", "cpp"]
     },

@@ -48,11 +48,16 @@ const imageSets = {
     },
 };
 
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
+const overlay = document.querySelector(".overlay");
+setImageCloseBtn();
+setOverlayClose();
 document.querySelectorAll(".images-section").forEach(section => {
-    showImages(section);
+    init(section);
 });
 
-function showImages(section) {
+function init(section) {
     const container = section.querySelector(".images-container");
     const project = container.dataset.project;
     const current = imageSets[project];
@@ -65,10 +70,11 @@ function showImages(section) {
     });
 
     const images = container.querySelectorAll("img");
-    setButtonBehavior(section, images);
+    setImgButtonBehavior(section, images);
+    setImageOpen(container);
 }
 
-function setButtonBehavior(section, images) {
+function setImgButtonBehavior(section, images) {
     if (!images || images.length === 0) return;
 
     let index = 0;
@@ -107,4 +113,45 @@ function updateButtons(images, index, prev, next) {
     } else {
         next.style.visibility = "visible";
     }
+}
+
+function setImageOpen(container) {
+    const imgs = container.querySelectorAll("img");
+    imgs.forEach(img => {
+        img.onclick = () => {
+            openImage(img);
+        }
+    });
+}
+
+function setImageCloseBtn() {
+    const closeBtn = modal.querySelector(".closeBtn");
+    closeBtn.onclick = () => {
+        closeImage();
+    }
+}
+
+function setOverlayClose() {
+    overlay.onclick = () => {
+        closeImage();
+    }
+    console.log("overlay");
+}
+
+function openImage(img) {
+    if (modalImg.src !== img.src) {
+        modalImg.src = img.src;
+    }
+
+    overlay.style.display = "block";
+    modal.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+}
+
+function closeImage() {
+    overlay.style.display = "none";
+    modal.style.display = "none";
+
+    document.body.style.overflow = "auto";
 }
