@@ -66,6 +66,16 @@ h1 {
     padding: 20px;
 }
 
+.link-text {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.link-text:hover {
+    opacity: 0.8;
+}
+
 .work-page .border-line {
     margin-top: 9.5px;
 }
