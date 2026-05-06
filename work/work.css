@@ -32,6 +32,10 @@ section img {
     margin: 0 auto;
 }
 
+.work-section > p {
+    text-align: center;
+}
+
 .tech {
     display: flex;
     line-height: 0;

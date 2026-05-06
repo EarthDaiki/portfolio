@@ -27,6 +27,12 @@ const works = [
         tech: ["python", "aws", "spotify"]
     },
     {
+        title: "Chrome Extension: ClipAsk AI",
+        img: "/images/clip_ask/options01.png",
+        href: "/work/clip_ask/clip_ask.html",
+        tech: ["html", "css", "js"]
+    },
+    {
         title: "Reverse Engineering & API Analysis",
         img: "/images/Unofficial_API/thumbnail.png",
         href: "/work/unofficial_api/unofficial_api.html",
@@ -116,14 +122,16 @@ function createWorkTemplate() {
         }
         
 
+        const imageHtml = work.img ? `<img src="${work.img}" alt="${work.title}-img">` : `<p>No Image</p>`;
+
         a.innerHTML = `
             <section class="work-section">
-            <h3>${work.title}</h3>
-            <img src=${work.img} alt="${work.title}-img">
-            <hr class="border-line">
-            <div class="tech">
-            ${work.tech.map(t => icons[t]).join("")}
-            </div>
+                <h3>${work.title}</h3>
+                ${imageHtml}
+                <hr class="border-line">
+                <div class="tech">
+                    ${work.tech.map(t => icons[t]).join("")}
+                </div>
             </section>
         `;
 

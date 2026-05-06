@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Daiki's Portfolio</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/work/detailed_work.css">
+    <link rel="stylesheet" href="/root/root.css">
+</head>
+<body class="work-page">
+    <header id="header-container"></header>
+
+    <main>
+        <h1>ClipAsk: Highlight Text & Ask ChatGPT</h1>
+
+        <section class="images-section">
+            <button class="prev">&#10094;</button>
+            <div class="images-container" data-project="clipask">
+            </div>
+            <button class="next">&#10095;</button>
+        </section>
+
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>GitHub: 
+                        <a href="https://github.com/EarthDaiki/ClipAsk-AI" target="_blank" class="link-text">
+                            View Repository
+                        </a>
+                    </li>
+                    <li>Demo Video: STILL WORKING ON IT.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>ClipAsk is a lightweight Chrome extension that lets users ask ChatGPT directly from any webpage.</li>
+                    <li>Users can highlight text or crop a visible area of the page and send it to ChatGPT instantly.</li>
+                    <li>The extension is designed to reduce context switching by showing answers inside the current webpage.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Text-to-ChatGPT using highlighted webpage text</li>
+                    <li>Image or screen-area analysis using crop mode</li>
+                    <li>Bottom overlay UI for displaying answers without leaving the page</li>
+                    <li>Optional Chat Mode for keeping conversation context per domain</li>
+                    <li>Optional Summary Mode to reduce token usage and API cost</li>
+                    <li>Domain-based memory management from the Memory tab</li>
+                    <li>Local settings storage using Chrome storage</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+                    <li><strong>Platform:</strong> Chrome Extension Manifest V3</li>
+                    <li><strong>Browser APIs:</strong> contextMenus, storage, scripting, activeTab, tabs</li>
+                    <li><strong>AI API:</strong> OpenAI Responses API</li>
+                    <li><strong>Image Processing:</strong> Browser screenshot capture and canvas cropping</li>
+                    <li><strong>Rendering:</strong> marked.umd.js for Markdown rendering</li>
+                    <li><strong>Security:</strong> DOMPurify for sanitizing rendered HTML</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="architecture-container">
+            <h3 class="title">Architecture / How It Works</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>Model Selection Flow:</h3>
+                    <ul>
+                        <li>User enters an OpenAI API Key in the Options page</li>
+                        <li>The extension fetches available models from the OpenAI API</li>
+                        <li>Unsupported models such as image generation, audio, realtime, transcription, and text-to-speech models are filtered out internally</li>
+                        <li>Only usable models are shown in the model dropdowns</li>
+                        <li>The selected model is used for text, cropped image, or summary requests</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>Text Request Flow:</h3>
+                    <ul>
+                        <li>User highlights text on a webpage</li>
+                        <li>User right-clicks and selects Ask ChatGPT (selected text)</li>
+                        <li>The extension sends the selected text to the OpenAI API</li>
+                        <li>The response is rendered in a bottom overlay on the current page</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>Image Request Flow:</h3>
+                    <ul>
+                        <li>User right-clicks and selects Ask ChatGPT (crop image area)</li>
+                        <li>User drags to select a visible area of the page</li>
+                        <li>The extension captures the visible tab</li>
+                        <li>The selected area is cropped using canvas</li>
+                        <li>The cropped image is sent to the OpenAI API</li>
+                        <li>The answer is displayed in the page overlay</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>Chat Mode Flow:</h3>
+                    <ul>
+                        <li>Conversation history is organized by website domain</li>
+                        <li>The extension stores the previous response ID for each domain</li>
+                        <li>Follow-up requests can continue the same conversation context</li>
+                        <li>Chat Mode can be turned on or off in Settings</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>Summary Mode Flow:</h3>
+                    <ul>
+                        <li>Summary Mode works when Chat Mode is enabled</li>
+                        <li>After a set number of messages, the conversation is summarized</li>
+                        <li>The conversation ID is reset</li>
+                        <li>The summary is reused as compact context for future messages</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="settings-container">
+            <h3 class="title">Settings</h3>
+            <div class="text-section">
+                <ul>
+                    <li>OpenAI API Key</li>
+                    <li>Additional Prompt</li>
+                    <li>Text Model</li>
+                    <li>Image Model</li>
+                    <li>Summary Model</li>
+                    <li>Max Output Tokens</li>
+                    <li>Chat Mode</li>
+                    <li>Summary Mode</li>
+                    <li>Summary Frequency</li>
+                </ul>
+
+                <p>
+                    The extension fetches available models from the OpenAI API and internally filters the list before showing it in the model dropdowns.
+                    Models that are not useful for this extension, such as image generation, audio, realtime, transcription, or text-to-speech models, are not displayed.
+                    This helps users choose only models that can be used for highlighted text requests, cropped image analysis, and summarization.
+                </p>
+
+                <p>
+                    All settings are stored locally in the browser using chrome.storage.local.
+                </p>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="permissions-container">
+            <h3 class="title">Permissions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>Chrome Permissions:</h3>
+                    <ul>
+                        <li><strong>contextMenus:</strong> Adds right-click options for selected text and crop mode</li>
+                        <li><strong>storage:</strong> Saves settings, API key, chat mode settings, and domain memory locally</li>
+                        <li><strong>scripting:</strong> Injects the overlay UI, crop UI, Markdown parser, and sanitizer into webpages</li>
+                        <li><strong>activeTab:</strong> Allows the extension to interact with the active tab after user action</li>
+                        <li><strong>tabs:</strong> Gets the current tab URL/domain and captures the visible tab for image cropping</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>Host Permissions:</h3>
+                    <ul>
+                        <li><strong>https://*/*:</strong> Allows the extension to work on HTTPS websites</li>
+                        <li><strong>http://*/*:</strong> Allows the extension to work on HTTP websites</li>
+                        <li><strong>https://api.openai.com/*:</strong> Allows requests to the OpenAI API</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="manifest-container">
+            <h3 class="title">Manifest Information</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Manifest Version:</strong> 3</li>
+                    <li><strong>Name:</strong> ClipAsk: Highlight Text & Ask ChatGPT</li>
+                    <li><strong>Version:</strong> 1.1.1</li>
+                    <li><strong>Description:</strong> Highlight or crop anything and ask AI instantly!</li>
+                    <li><strong>Background:</strong> background.js service worker</li>
+                    <li><strong>Options Page:</strong> options.html</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="project-structure-container">
+            <h3 class="title">Project Structure</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>background.js:</strong> Core extension logic, context menus, API calls, crop UI, and overlay UI</li>
+                    <li><strong>options.html:</strong> Options page HTML</li>
+                    <li><strong>options.js:</strong> Options page logic and memory management</li>
+                    <li><strong>options.css:</strong> Options page styling</li>
+                    <li><strong>summary.txt:</strong> Prompt used for summarization</li>
+                    <li><strong>marked.umd.js:</strong> Markdown parser</li>
+                    <li><strong>purify.min.js:</strong> HTML sanitizer</li>
+                    <li><strong>manifest.json:</strong> Chrome extension manifest</li>
+                    <li><strong>icons/:</strong> Extension icons in multiple sizes</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="challenges-container">
+            <h3 class="title">Challenges & Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① Displaying answers without hiding the page</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>A fixed overlay could cover important webpage content.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Implemented a bottom overlay with scroll support.</li>
+                            <li>Added spacing so the overlay does not permanently hide content at the bottom of the page.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>② Handling image input from webpages</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>The extension needed a simple way for users to send only a specific part of the screen.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Built a crop selection UI directly on the webpage.</li>
+                            <li>Captured the visible tab and cropped the selected area using canvas.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>③ Managing conversation context</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Long conversations can increase token usage and cost.</li>
+                            <li>Different websites may need separate conversation context.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Stored conversations separately by domain.</li>
+                            <li>Added optional Summary Mode to compress long conversation history.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>④ Keeping user data local</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>The extension stores sensitive settings such as the OpenAI API key.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Stored the API key and settings locally using chrome.storage.local.</li>
+                            <li>No custom backend server is used.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="privacy-container">
+            <h3 class="title">Privacy</h3>
+            <div class="text-section">
+                <ul>
+                    <li>The OpenAI API key is stored locally in the browser.</li>
+                    <li>Settings are stored using chrome.storage.local.</li>
+                    <li>No custom backend server is used.</li>
+                    <li>Requests are sent directly from the extension to the OpenAI API.</li>
+                    <li>Chat history is optional and depends on Chat Mode.</li>
+                    <li>Domain-based conversation memory can be deleted from the Memory tab.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Built a Chrome extension that allows users to ask ChatGPT about selected text or cropped page areas without leaving the current website.</li>
+                    <li>Implemented optional domain-based chat memory and summary features to support follow-up questions while controlling token usage.</li>
+                    <li>Gained practical experience with Chrome Extension Manifest V3, browser APIs, OpenAI API integration, image cropping, and local storage.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Daiki's Portfolio</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="image-wrapper">
+            <img id="modal-img">
+            <button type="button" class="closeBtn">×</button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <!-- JS -->
+    <script src="/root/header.js"></script>
+    <script src="/work/detailed_work.js"></script>
+</body>
+</html>

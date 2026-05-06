@@ -1,4 +1,15 @@
 const imageSets = {
+    clipask: {
+        basePath: "/images/clip_ask/",
+        files: [
+            "options01.png",
+            "options02.png",
+            "options03.png",
+            "highlight_text.png",
+            "crop.png",
+            "crop_answer.png"
+        ]
+    },
     downloader: {
         basePath: "/images/downloader/",
         files: [
@@ -62,7 +73,17 @@ function init(section) {
     const project = container.dataset.project;
     const current = imageSets[project];
 
-    if (!current || !current.files || current.files.length === 0) return;
+    if (!current || !current.files || current.files.length === 0) {
+        const prev = section.querySelector(".prev");
+        const next = section.querySelector(".next");
+        if (prev) prev.style.display = "none";
+        if (next) next.style.display = "none";
+
+        const p = document.createElement("p")
+        p.textContent = "No Images"
+        container.appendChild(p)
+        return;
+    }
     current.files.forEach(fileName => {
         const img = document.createElement("img");
         img.src = current.basePath + fileName;
