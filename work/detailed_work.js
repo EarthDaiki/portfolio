@@ -45,6 +45,11 @@ const imageSets = {
             "thumbnail.png"
         ]
     },
+    portfolio_website: {
+        basePath: "/images/portfolio_website/",
+        files: [
+        ]
+    },
     unofficial_api: {
         basePath: "/images/Unofficial_API/",
         files: [

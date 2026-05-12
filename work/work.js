@@ -28,8 +28,14 @@ const works = [
     },
     {
         title: "Chrome Extension: ClipAsk AI",
-        img: "/images/clip_ask/options01.png",
+        img: "/images/clip_ask/thumbnail.png",
         href: "/work/clip_ask/clip_ask.html",
+        tech: ["html", "css", "js"]
+    },
+    {
+        title: "Portfolio Website",
+        img: "",
+        href: "/work/portfolio_website/portfolio_website.html",
         tech: ["html", "css", "js"]
     },
     {
