@@ -34,7 +34,7 @@ const works = [
     },
     {
         title: "Portfolio Website",
-        img: "",
+        img: "/images/portfolio_website/home.png",
         href: "/work/portfolio_website/portfolio_website.html",
         tech: ["html", "css", "js"]
     },

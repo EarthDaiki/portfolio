@@ -11,7 +11,7 @@ const imageSets = {
         ]
     },
     downloader: {
-        basePath: "/images/downloader/",
+        basePath: "/images/Downloader/",
         files: [
             "thumbnail.png"
         ]
@@ -48,6 +48,7 @@ const imageSets = {
     portfolio_website: {
         basePath: "/images/portfolio_website/",
         files: [
+            "home.png"
         ]
     },
     unofficial_api: {
