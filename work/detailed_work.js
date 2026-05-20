@@ -1,4 +1,9 @@
 const imageSets = {
+    minefia: {
+        basePath: "/images/minefia/",
+        files: [
+        ]
+    },
     clipask: {
         basePath: "/images/clip_ask/",
         files: [
