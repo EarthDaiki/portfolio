@@ -70,6 +70,15 @@ const imageSets = {
     },
 };
 
+const videoSets = {
+    security_camera: {
+        basePath: "/videos/",
+        files: [
+            "PythonWeb.mp4",
+        ]
+    },
+}
+
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modal-img");
 const overlay = document.querySelector(".overlay");
@@ -78,6 +87,7 @@ setOverlayClose();
 document.querySelectorAll(".images-section").forEach(section => {
     init(section);
 });
+videoInit();
 
 function init(section) {
     const container = section.querySelector(".images-container");
@@ -113,7 +123,6 @@ function setImgButtonBehavior(section, images) {
     const prev = section.querySelector(".prev");
     const next = section.querySelector(".next");
 
-    // 初期表示
     images[index].classList.add("active");
     updateButtons(images, index, prev, next);
 
@@ -186,4 +195,23 @@ function closeImage() {
     modal.style.display = "none";
 
     document.body.style.overflow = "auto";
+}
+
+function videoInit() {
+    const container = document.querySelector(".video-section");
+    const project = container.dataset.project;
+    const current = videoSets[project];
+    if (!current) return;
+
+    current.files.forEach(fileName => {
+        const video = document.createElement("video");
+        video.controls = true;
+        video.width = 600;
+
+        const source = document.createElement("source");
+        source.src = current.basePath + fileName;
+        source.type = "video/mp4";
+        video.appendChild(source);
+        container.appendChild(video);
+    });
 }

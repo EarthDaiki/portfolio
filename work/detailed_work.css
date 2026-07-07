@@ -9,7 +9,6 @@ main {
     align-items: center;
 }
 
-/* ここが基準 */
 .images-container {
     max-width: 600px;
     width: 100%;
@@ -20,7 +19,6 @@ main {
     align-items: center;
 }
 
-/* 画像 */
 .images-container img {
     display: none;
     max-height: 100%;
@@ -32,7 +30,6 @@ main {
     display: block;
 }
 
-/* ボタン共通 */
 .images-section button {
     background: rgba(0,0,0,0.5);
     color: white;
@@ -41,6 +38,20 @@ main {
     cursor: pointer;
     font-size: 20px;
     border-radius: 5px;
+}
+
+.video-section {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+.video-section.two-columns {
+  grid-template-columns: 1fr 1fr;
+}
+
+.video-section video {
+  width: 100%;
 }
 
 /* hover */
@@ -124,4 +135,10 @@ h1 {
 
     z-index: 100;
     display: none;
+}
+
+@media (max-width: 767px) {
+  .video-section.two-columns {
+    grid-template-columns: 1fr;
+  }
 }
