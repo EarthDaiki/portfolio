@@ -4,6 +4,11 @@ const imageSets = {
         files: [
         ]
     },
+    task_xp: {
+        basePath: "/images/task_xp/",
+        files: [
+        ]
+    },
     clipask: {
         basePath: "/images/clip_ask/",
         files: [

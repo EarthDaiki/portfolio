@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <title>Daiki's Portfolio</title>
+
+    <link rel="stylesheet" href="/work/detailed_work.css">
+    <link rel="stylesheet" href="/root/root.css">
+</head>
+<body class="work-page">
+    <header id="header-container"></header>
+
+    <main>
+        <h1>Minefia Task XP</h1>
+
+        <section class="images-section">
+            <button class="prev">&#10094;</button>
+            <div class="images-container" data-project="task_xp">
+            </div>
+            <button class="next">&#10095;</button>
+        </section>
+
+        <section class="video-section" data-project="task_xp">
+        </section>
+
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>GitHub: 
+                        <a href="https://github.com/EarthDaiki/Minefia-TaskXP" target="_blank" class="link-text">
+                            View Repository
+                        </a>
+                    </li>
+                    <li>Demo Video: STILL WORKING ON IT.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Minefia Task XP is a desktop task management application currently being developed with Tauri.</li>
+                    <li>The app is designed to turn daily tasks and to-do items into a more motivating workflow through XP-based progress tracking.</li>
+                    <li>The goal is to combine a lightweight desktop experience with simple productivity features that make task completion feel rewarding.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Create, edit, complete, and delete tasks from a desktop interface.</li>
+                    <li>Track task completion through XP and progress-based feedback.</li>
+                    <li>Organize tasks by status so users can focus on what needs attention now.</li>
+                    <li>Keep the application lightweight by using Tauri instead of a heavier desktop runtime.</li>
+                    <li>Provide a local-first productivity workflow suitable for daily personal use.</li>
+                    <li>Build the foundation for future features such as levels, streaks, categories, and task history.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Desktop Framework:</strong> Tauri</li>
+                    <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+                    <li><strong>Backend Runtime:</strong> Rust through Tauri commands</li>
+                    <li><strong>Platform:</strong> Cross-platform desktop application</li>
+                    <li><strong>Focus Areas:</strong> local task management, desktop UI, state handling, productivity tooling</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="architecture-container">
+            <h3 class="title">Architecture / Workflow</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>Application Flow:</h3>
+                    <ul>
+                        <li>User creates a task from the desktop UI.</li>
+                        <li>The task is added to the active task list with its current status.</li>
+                        <li>When a task is completed, the app updates the task state and awards XP.</li>
+                        <li>The UI refreshes progress information so the user can immediately see completion feedback.</li>
+                        <li>Future versions can extend this flow with levels, task categories, streaks, and history views.</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>Design Considerations:</h3>
+                    <ul>
+                        <li>Designed as a small desktop tool that can stay fast and responsive during repeated daily use.</li>
+                        <li>Separated the user interface from desktop-side logic so the app can evolve without tightly coupling all behavior to the view layer.</li>
+                        <li>Used Tauri to reduce application size while still providing access to native desktop capabilities.</li>
+                        <li>Kept the gamification system simple so XP supports productivity instead of distracting from task completion.</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="project-status-container">
+            <h3 class="title">Project Status</h3>
+            <div class="text-section">
+                <ul>
+                    <li>This project is currently in development.</li>
+                    <li>The core direction is a Tauri-based to-do app with XP-style progress feedback.</li>
+                    <li>The current focus is building a reliable task workflow before expanding the gamification features.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="challenges-container">
+            <h3 class="title">Challenges &amp; Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① Making task management feel motivating</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Basic to-do lists can feel repetitive, making it easy for users to lose motivation over time.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Designed the application around XP-based feedback so completed tasks contribute to visible progress.</li>
+                            <li>Kept the reward system lightweight to support productivity without turning the app into a distraction.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>② Building a lightweight desktop application</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Desktop productivity tools should open quickly and feel responsive during frequent use.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Selected Tauri to provide a native desktop application structure with a smaller footprint.</li>
+                            <li>Planned the app around a simple UI and focused task operations to keep the experience fast.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>③ Designing for future expansion</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>Features such as levels, streaks, categories, and task history can add complexity if the first version is not structured carefully.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Started with a clear task lifecycle and XP update flow as the foundation.</li>
+                            <li>Kept future gamification features separate from the basic task completion workflow.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Started development of a Tauri desktop application for managing daily tasks with XP-based progress.</li>
+                    <li>Defined the project direction around lightweight desktop productivity and simple gamification.</li>
+                    <li>Built a foundation for future improvements such as persistent storage, levels, streaks, and task analytics.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Daiki's Portfolio</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="image-wrapper">
+            <img id="modal-img">
+            <button type="button" class="closeBtn">×</button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <script src="/root/header.js"></script>
+    <script src="/work/detailed_work.js"></script>
+</body>
+</html>

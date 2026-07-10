@@ -3,10 +3,10 @@ window.addEventListener("resize", adjustZigZag);
 
 const works = [
     {
-      title: "RPG Game",
-      img: "",
-      href: "/work/rpg_game/rpg_game.html",
-      tech: ["ue", "cpp"]
+        title: "RPG Game",
+        img: "",
+        href: "/work/rpg_game/rpg_game.html",
+        tech: ["ue", "cpp"]
     },
     {
         title: "Old House",
@@ -30,6 +30,12 @@ const works = [
         title: "AI Agent: Minefia",
         img: "",
         href: "/work/minefia/minefia.html",
+        tech: ["react", "rust"]
+    },
+    {
+        title: "AI To-Do App: Minefia Task XP",
+        img: "",
+        href: "/work/task_xp/task_xp.html",
         tech: ["react", "rust"]
     },
     {
