@@ -11,7 +11,7 @@
 .introduction-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 16px;
     padding: 20px;
 }
 
@@ -23,7 +23,13 @@
     border-radius: 3%;
 }
 
-#resumeBtn {
+.files-container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.resumeBtn {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
@@ -34,8 +40,8 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#resumeBtn:hover,
-#resumeBtn:focus-visible {
+.resumeBtn:hover,
+.resumeBtn:focus-visible {
     transform: translateY(-5px);
     box-shadow: 0 0px 15px rgba(255, 255, 255, 0.5);
 }
