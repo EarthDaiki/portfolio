@@ -15,7 +15,7 @@
     <header id="header-container"></header>
 
     <main>
-        <h1>Minefia Task XP</h1>
+        <h1>Minefia TaskXP</h1>
 
         <section class="images-section">
             <button class="prev">&#10094;</button>
@@ -46,9 +46,10 @@
             <h3 class="title">Overview</h3>
             <div class="text-section">
                 <ul>
-                    <li>Minefia Task XP is a desktop task management application currently being developed with Tauri.</li>
-                    <li>The app is designed to turn daily tasks and to-do items into a more motivating workflow through XP-based progress tracking.</li>
-                    <li>The goal is to combine a lightweight desktop experience with simple productivity features that make task completion feel rewarding.</li>
+                    <li>Minefia TaskXP is a desktop task management app built with Tauri, React, TypeScript, Rust, and SQLite.</li>
+                    <li>Developed a complete prototype with local task management, tag management, calendar views, settings, and secure API key management.</li>
+                    <li>Implemented AI Quick Add using the OpenAI Responses API to convert natural language into editable task drafts.</li>
+                    <li>Designed the app as a local-first productivity tool that stores task data locally while keeping OpenAI API keys in the OS keychain.</li>
                 </ul>
             </div>
             <hr class="border-line">
@@ -58,12 +59,16 @@
             <h3 class="title">Key Features</h3>
             <div class="text-section">
                 <ul>
-                    <li>Create, edit, complete, and delete tasks from a desktop interface.</li>
-                    <li>Track task completion through XP and progress-based feedback.</li>
-                    <li>Organize tasks by status so users can focus on what needs attention now.</li>
-                    <li>Keep the application lightweight by using Tauri instead of a heavier desktop runtime.</li>
-                    <li>Provide a local-first productivity workflow suitable for daily personal use.</li>
-                    <li>Build the foundation for future features such as levels, streaks, categories, and task history.</li>
+                    <li>Create tasks with title, description, priority, difficulty, estimated minutes, due date, due time, and tags.</li>
+                    <li>View tasks by list, today, upcoming, completed, calendar, and tag.</li>
+                    <li>Open a task detail page to inspect and edit task data.</li>
+                    <li>Complete, restore, start, and reset task progress.</li>
+                    <li>Track started time, completed time, estimated minutes, and actual minutes.</li>
+                    <li>Add, select, display, and delete tags.</li>
+                    <li>Manage OpenAI API keys from the Settings page.</li>
+                    <li>Store API keys in the OS keychain through the Tauri backend.</li>
+                    <li>Use AI Quick Add to convert natural language into an editable task draft.</li>
+                    <li>Store task data locally with SQLite.</li>
                 </ul>
             </div>
             <hr class="border-line">
@@ -74,10 +79,13 @@
             <div class="text-section">
                 <ul>
                     <li><strong>Desktop Framework:</strong> Tauri</li>
-                    <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+                    <li><strong>Frontend:</strong> React, TypeScript, Vite</li>
                     <li><strong>Backend Runtime:</strong> Rust through Tauri commands</li>
-                    <li><strong>Platform:</strong> Cross-platform desktop application</li>
-                    <li><strong>Focus Areas:</strong> local task management, desktop UI, state handling, productivity tooling</li>
+                    <li><strong>Database:</strong> SQLite</li>
+                    <li><strong>Calendar:</strong> FullCalendar</li>
+                    <li><strong>AI API:</strong> OpenAI Responses API</li>
+                    <li><strong>Security:</strong> OS keychain integration for OpenAI API key storage</li>
+                    <li><strong>Platform:</strong> Cross-platform desktop application prototype</li>
                 </ul>
             </div>
             <hr class="border-line">
@@ -87,37 +95,47 @@
             <h3 class="title">Architecture / Workflow</h3>
             <div class="text-section">
                 <div class="element">
-                    <h3>Application Flow:</h3>
+                    <h3>Task Management Flow:</h3>
                     <ul>
-                        <li>User creates a task from the desktop UI.</li>
-                        <li>The task is added to the active task list with its current status.</li>
-                        <li>When a task is completed, the app updates the task state and awards XP.</li>
-                        <li>The UI refreshes progress information so the user can immediately see completion feedback.</li>
-                        <li>Future versions can extend this flow with levels, task categories, streaks, and history views.</li>
+                        <li>User creates or edits a task from the desktop UI.</li>
+                        <li>Task fields include title, description, priority, difficulty, estimated minutes, due date, due time, and tags.</li>
+                        <li>The task can be viewed through list, today, upcoming, completed, calendar, and tag-based views.</li>
+                        <li>User can start, complete, restore, or reset task progress.</li>
+                        <li>The app tracks started time, completed time, estimated minutes, and actual minutes.</li>
+                        <li>Task and tag data are stored locally with SQLite.</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>AI Quick Add Flow:</h3>
+                    <ul>
+                        <li>User writes a natural language prompt such as <code>Cook dinner today at 7pm</code>.</li>
+                        <li>The app sends the prompt to the OpenAI Responses API.</li>
+                        <li>The API returns a structured task draft with fields such as title, description, due date, due time, priority, difficulty, estimated minutes, existing tags, and suggested tags.</li>
+                        <li>The AI result is opened in the task dialog instead of being saved automatically.</li>
+                        <li>User reviews, edits, and manually saves the generated task draft.</li>
+                    </ul>
+                </div>
+
+                <div class="element">
+                    <h3>Settings &amp; Storage Flow:</h3>
+                    <ul>
+                        <li>User can add, select, and delete OpenAI API keys from the Settings page.</li>
+                        <li>API keys are stored in the OS keychain through the Tauri backend.</li>
+                        <li>SQLite stores only key metadata such as display name and which key is selected as the main key.</li>
+                        <li>The Settings page also supports tag management.</li>
                     </ul>
                 </div>
 
                 <div class="element">
                     <h3>Design Considerations:</h3>
                     <ul>
-                        <li>Designed as a small desktop tool that can stay fast and responsive during repeated daily use.</li>
-                        <li>Separated the user interface from desktop-side logic so the app can evolve without tightly coupling all behavior to the view layer.</li>
-                        <li>Used Tauri to reduce application size while still providing access to native desktop capabilities.</li>
-                        <li>Kept the gamification system simple so XP supports productivity instead of distracting from task completion.</li>
+                        <li>Kept task data local with SQLite to support a desktop-first workflow.</li>
+                        <li>Used the OS keychain for API key storage so sensitive keys are not stored directly in SQLite.</li>
+                        <li>Designed AI Quick Add as an assisted workflow where users remain in control before saving generated task data.</li>
+                        <li>Used Tauri to combine a React frontend with Rust-backed desktop capabilities.</li>
                     </ul>
                 </div>
-            </div>
-            <hr class="border-line">
-        </section>
-
-        <section class="project-status-container">
-            <h3 class="title">Project Status</h3>
-            <div class="text-section">
-                <ul>
-                    <li>This project is currently in development.</li>
-                    <li>The core direction is a Tauri-based to-do app with XP-style progress feedback.</li>
-                    <li>The current focus is building a reliable task workflow before expanding the gamification features.</li>
-                </ul>
             </div>
             <hr class="border-line">
         </section>
@@ -126,52 +144,69 @@
             <h3 class="title">Challenges &amp; Solutions</h3>
             <div class="text-section">
                 <div class="element">
-                    <h4>① Making task management feel motivating</h4>
+                    <h4>① Converting natural language into safe task drafts</h4>
                     <div class="child-element">
                         <h4>Problem:</h4>
                         <ul>
-                            <li>Basic to-do lists can feel repetitive, making it easy for users to lose motivation over time.</li>
+                            <li>AI-generated task data can be useful, but saving it automatically could create incorrect tasks or unwanted metadata.</li>
                         </ul>
                     </div>
                     <div class="child-element">
                         <h4>Solution:</h4>
                         <ul>
-                            <li>Designed the application around XP-based feedback so completed tasks contribute to visible progress.</li>
-                            <li>Kept the reward system lightweight to support productivity without turning the app into a distraction.</li>
+                            <li>Implemented AI Quick Add as an editable draft flow.</li>
+                            <li>Opened the generated result in the task dialog so the user can review, edit, and save it manually.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="element">
-                    <h4>② Building a lightweight desktop application</h4>
+                    <h4>② Protecting OpenAI API keys in a desktop app</h4>
                     <div class="child-element">
                         <h4>Problem:</h4>
                         <ul>
-                            <li>Desktop productivity tools should open quickly and feel responsive during frequent use.</li>
+                            <li>The app needed to store user API keys without keeping the raw key values in the local SQLite database.</li>
                         </ul>
                     </div>
                     <div class="child-element">
                         <h4>Solution:</h4>
                         <ul>
-                            <li>Selected Tauri to provide a native desktop application structure with a smaller footprint.</li>
-                            <li>Planned the app around a simple UI and focused task operations to keep the experience fast.</li>
+                            <li>Stored API keys in the OS keychain through the Tauri backend.</li>
+                            <li>Stored only non-sensitive key metadata in SQLite, such as display name and main key selection.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="element">
-                    <h4>③ Designing for future expansion</h4>
+                    <h4>③ Supporting multiple task views and tags</h4>
                     <div class="child-element">
                         <h4>Problem:</h4>
                         <ul>
-                            <li>Features such as levels, streaks, categories, and task history can add complexity if the first version is not structured carefully.</li>
+                            <li>Tasks needed to be accessible from different workflows, including list, today, upcoming, completed, calendar, and tag-based views.</li>
                         </ul>
                     </div>
                     <div class="child-element">
                         <h4>Solution:</h4>
                         <ul>
-                            <li>Started with a clear task lifecycle and XP update flow as the foundation.</li>
-                            <li>Kept future gamification features separate from the basic task completion workflow.</li>
+                            <li>Implemented multiple task views over the same local task data.</li>
+                            <li>Added tag creation, selection, display, and deletion to support flexible organization.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element">
+                    <h4>④ Tracking real task progress</h4>
+                    <div class="child-element">
+                        <h4>Problem:</h4>
+                        <ul>
+                            <li>A task app needs more than a complete checkbox when users want to compare estimated and actual effort.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Solution:</h4>
+                        <ul>
+                            <li>Tracked started time, completed time, estimated minutes, and actual minutes.</li>
+                            <li>Added start, complete, restore, and reset actions for task progress.</li>
                         </ul>
                     </div>
                 </div>
@@ -183,9 +218,10 @@
             <h3 class="title">Result / Outcome</h3>
             <div class="text-section">
                 <ul>
-                    <li>Started development of a Tauri desktop application for managing daily tasks with XP-based progress.</li>
-                    <li>Defined the project direction around lightweight desktop productivity and simple gamification.</li>
-                    <li>Built a foundation for future improvements such as persistent storage, levels, streaks, and task analytics.</li>
+                    <li>Completed a working prototype of a desktop task management app with local SQLite storage.</li>
+                    <li>Implemented task management, tag management, calendar views, settings, API key management, and AI Quick Add.</li>
+                    <li>Built a secure API key storage flow using the OS keychain through the Tauri backend.</li>
+                    <li>The project is not production-ready yet, but the main task management flow and AI-assisted quick add workflow are implemented.</li>
                 </ul>
             </div>
             <hr class="border-line">
