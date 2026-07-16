@@ -7,6 +7,9 @@ const imageSets = {
     task_xp: {
         basePath: "/images/task_xp/",
         files: [
+            "thumbnail.png",
+            "quick_add.png",
+            "api_key_setting.png",
         ]
     },
     clipask: {
@@ -79,7 +82,13 @@ const videoSets = {
     security_camera: {
         basePath: "/videos/",
         files: [
-            "PythonWeb.mp4",
+            "security_camera.mp4",
+        ]
+    },
+    task_xp: {
+        basePath: "/videos/",
+        files: [
+            "task_xp.mp4",
         ]
     },
 }

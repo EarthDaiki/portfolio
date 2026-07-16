@@ -34,9 +34,9 @@ const works = [
     },
     {
         title: "AI To-Do App: Minefia Task XP",
-        img: "",
+        img: "/images/task_xp/thumbnail.png",
         href: "/work/task_xp/task_xp.html",
-        tech: ["react", "rust"]
+        tech: ["react", "rust", "sqlite"]
     },
     {
         title: "Chrome Extension: ClipAsk AI",
