@@ -18,7 +18,7 @@ const works = [
         title: "Security Camera",
         img: "/images/security_camera/earth-daiki-camera-thumbnail.png",
         href: "/work/security_camera/security_camera.html",
-        tech: ["python", "aws", "sql", "postgresql", "html", "css", "js"]
+        tech: ["python", "aws", "postgresql", "html", "css", "js"]
     },
     {
         title: "Spotify Playlist Automation",
