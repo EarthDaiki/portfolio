@@ -4,6 +4,11 @@ const imageSets = {
         files: [
         ]
     },
+    task_xp_iphone: {
+        basePath: "/images/task_xp_iphone/",
+        files: [
+        ]
+    },
     task_xp: {
         basePath: "/images/task_xp/",
         files: [

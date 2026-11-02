@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <title>Daiki's Portfolio</title>
+
+    <link rel="stylesheet" href="/work/detailed_work.css">
+    <link rel="stylesheet" href="/root/root.css">
+</head>
+<body class="work-page">
+    <header id="header-container"></header>
+
+    <main>
+        <h1>Minefia Audio</h1>
+
+        <section class="images-section">
+            <button class="prev">&#10094;</button>
+            <div class="images-container" data-project="audio_transcript"></div>
+            <button class="next">&#10095;</button>
+        </section>
+
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>GitHub:
+                        <a href="https://github.com/EarthDaiki/Minefia-Audio" target="_blank" rel="noopener noreferrer" class="link-text">
+                            View Repository
+                        </a>
+                    </li>
+                    <li>Project Status: Prototype. Workflows and compatibility may change, and bugs or incomplete behavior may remain.</li>
+                    <li>Platform: macOS 13 or later, Windows with WASAPI support, and Linux desktop sessions with PipeWire for System Audio mode.</li>
+                    <li>OpenAI API access is required for transcription and optional text-processing features.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Minefia Audio is a Tauri desktop app that sends audio to the OpenAI Audio Transcriptions API, displays transcript text as it streams, and exports completed transcripts.</li>
+                    <li>It supports audio from local files, system audio, a microphone, YouTube and URLs, HLS streams, and web pages.</li>
+                    <li>Users can also translate transcripts, generate summaries and study notes, and ask questions using transcript context.</li>
+                    <li>Audio files and transcripts are managed in app storage and can be reviewed from the in-app Library.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Stream live transcript text while audio transcription is in progress.</li>
+                    <li>Capture System Audio on macOS, Windows, and Linux, or record from a selected microphone.</li>
+                    <li>Use Live Mode for real-time captions, with partial and final transcription events and reconnect handling.</li>
+                    <li>Inspect local audio and video, select an audio track, preserve compatible source codecs, and split long audio near silence into ordered parts.</li>
+                    <li>Resume interrupted file transcription jobs from saved chunk checkpoints; retry temporary network failures and rate limits.</li>
+                    <li>Inspect YouTube, direct media URLs, HLS playlists, and web pages for available media streams before extraction.</li>
+                    <li>Translate completed transcripts, produce incremental Markdown notes and a final summary, and ask questions using transcript and summary context.</li>
+                    <li>Manage multiple OpenAI keys and Projects, validate keys before saving, and view aggregated usage where supported.</li>
+                    <li>Estimate transcription and text-processing costs before starting optional API work.</li>
+                    <li>Browse, preview, open, and delete app-managed recordings and transcript files in the Library.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Desktop Framework:</strong> Tauri</li>
+                    <li><strong>Frontend:</strong> React</li>
+                    <li><strong>Backend:</strong> Rust</li>
+                    <li><strong>Transcription:</strong> OpenAI Audio Transcriptions API and Realtime transcription</li>
+                    <li><strong>Text Processing:</strong> OpenAI Responses API</li>
+                    <li><strong>Audio and Media:</strong> FFmpeg, ffprobe, yt-dlp, and Chromium for isolated web-page inspection</li>
+                    <li><strong>Credential Storage:</strong> Operating-system Keychain</li>
+                    <li><strong>Audio Capture:</strong> Core Audio, WASAPI Loopback, and PipeWire</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="architecture-container">
+            <h3 class="title">Architecture / Workflow</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>Transcription Workflow:</h3>
+                    <ul>
+                        <li>The app inspects the selected source and its audio streams before processing.</li>
+                        <li>When needed, audio is extracted or explicitly confirmed for conversion, then split into size-limited chunks around quiet sections.</li>
+                        <li>Chunks are transcribed with bounded concurrency, retries, and checkpoints; completed results are merged in source order.</li>
+                        <li>Streaming events update transcript text as the API returns it.</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>Capture Modes:</h3>
+                    <ul>
+                        <li>Standard Mode buffers captured audio and splits at quiet sections after a 90-second minimum, with a 150-second hard limit.</li>
+                        <li>Live Mode streams mono PCM to a Realtime transcription session and commits turns using client-side speech-end detection.</li>
+                        <li>Captured recordings are retained in app data, including while Live Mode is active.</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>Storage &amp; Credentials:</h3>
+                    <ul>
+                        <li>API key secrets stay in the system Keychain; the frontend does not receive them.</li>
+                        <li>Recordings, extracted media, transcripts, summaries, and resumable job checkpoints are stored in app-managed data locations.</li>
+                        <li>Local media can be referenced by path without copying; confirmed deletion of a referenced Library item deletes its source file.</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="challenges-container">
+            <h3 class="title">Challenges &amp; Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① Processing long recordings reliably</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>Long or variable-bitrate audio can exceed request limits, and interrupted uploads should not require repeating completed work.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Split audio near silence, recheck oversized segments, checkpoint completed chunks, and retry temporary failures with backoff.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>② Supporting desktop audio capture across platforms</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>System audio and microphone capture use different native APIs and have platform-specific permissions and device availability.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Use platform-native capture backends and a shared queue with silence-based chunking, concurrency controls, and explicit device and permission handling.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>③ Handling variable online media sources safely</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>Websites expose media differently, and an inspected source may still fail to download or decode.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Inspect available streams before extraction, use a private Chromium profile for web pages, block private-network browser requests, and do not bypass DRM or access controls.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Built a cross-platform desktop prototype for transcription workflows spanning local files, live capture, and online media.</li>
+                    <li>Added streamed transcript rendering, resumable chunk processing, translation, summaries, study notes, and transcript Q&amp;A.</li>
+                    <li>Designed media retention, Keychain-based credentials, cost estimates, and source-access limitations into the workflow.</li>
+                    <li>The project remains a prototype. Media compatibility and online source availability can vary, so important recordings and transcripts should be backed up.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Daiki's Portfolio</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="image-wrapper">
+            <img id="modal-img">
+            <button type="button" class="closeBtn">&times;</button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <script src="/root/header.js"></script>
+    <script src="/work/detailed_work.js"></script>
+</body>
+</html>

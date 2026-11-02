@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <title>Daiki's Portfolio</title>
+
+    <link rel="stylesheet" href="/work/detailed_work.css">
+    <link rel="stylesheet" href="/root/root.css">
+</head>
+<body class="work-page">
+    <header id="header-container"></header>
+
+    <main>
+        <h1>Minefia LAN File Transfer</h1>
+
+        <section class="images-section">
+            <button class="prev">&#10094;</button>
+            <div class="images-container" data-project="lan_file_transfer"></div>
+            <button class="next">&#10095;</button>
+        </section>
+
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>GitHub:
+                        <a href="https://github.com/EarthDaiki/Minefia-lan-file-transfer" target="_blank" rel="noopener noreferrer" class="link-text">
+                            View Repository
+                        </a>
+                    </li>
+                    <li>Status: Early development. Tested locally on a single computer; transfers between separate LAN devices have not yet been verified.</li>
+                    <li>Getting Started: Run <code>go run ./receiver</code> and <code>go run ./sender</code> from separate terminals.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Minefia LAN File Transfer is an early Go prototype for exploring TCP networking, file I/O, and concurrent programming.</li>
+                    <li>The current sender and receiver establish a TCP connection locally, transfer file contents, and save the received data to a local file.</li>
+                    <li>The prototype has been tested on one computer. Transfers between separate devices on a LAN are not yet verified.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Send file contents over a TCP connection.</li>
+                    <li>Receive data and save it to a local file.</li>
+                    <li>Display the number of bytes transferred.</li>
+                    <li>Run the sender and receiver independently from separate terminal windows.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>Language:</strong> Go</li>
+                    <li><strong>Networking:</strong> TCP with Go <code>net.Listen</code> and <code>net.Dial</code></li>
+                    <li><strong>File Transfer:</strong> Go standard library <code>io.Copy</code></li>
+                    <li><strong>Structure:</strong> Separate sender and receiver programs</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="architecture-container">
+            <h3 class="title">Architecture / Workflow</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>File Transfer:</h3>
+                    <ul>
+                        <li>Start the receiver and sender independently in two terminal windows.</li>
+                        <li>The programs establish a local TCP connection and stream file contents from sender to receiver.</li>
+                        <li>The receiver saves the received data to a local file; the output filename is determined by its implementation.</li>
+                        <li>The current sender expects a file named <code>text.txt</code> unless its source is changed.</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>Project Structure:</h3>
+                    <ul>
+                        <li>The repository separates sender-side and receiver-side code into dedicated components.</li>
+                        <li>The project is implemented in Go and uses the Go module system.</li>
+                        <li>Goroutines, channels, multiple simultaneous connections, transfer verification, and automatic device discovery are planned improvements, not current features.</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="challenges-container">
+            <h3 class="title">Challenges &amp; Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① Coordinating transfers between devices</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>The initial prototype needed to establish a working sender-to-receiver TCP flow and transfer file bytes.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Use Go's TCP networking APIs and <code>io.Copy</code> to transfer data between separate sender and receiver programs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>② Supporting concurrent transfer work</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>Concurrent connections and transfer progress reporting are not implemented in the current prototype.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Goroutines and channels are identified as future work for concurrent connections and progress reporting.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Built a local TCP sender/receiver prototype that transfers a small text file between two processes on one computer.</li>
+                    <li>Established a foundation for exploring network file transfer in Go; cross-device LAN support remains unverified.</li>
+                    <li>Authentication, encryption, and robust interrupted-transfer recovery are not implemented. Use only in a trusted local testing environment.</li>
+                    <li>Concurrent transfers, progress channels, metadata, integrity checks, device discovery, and a GUI are planned improvements.</li>
+                    <li>The source code is available in the project repository.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Daiki's Portfolio</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="image-wrapper">
+            <img id="modal-img">
+            <button type="button" class="closeBtn">&times;</button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <script src="/root/header.js"></script>
+    <script src="/work/detailed_work.js"></script>
+</body>
+</html>

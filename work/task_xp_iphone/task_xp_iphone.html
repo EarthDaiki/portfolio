@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <title>Daiki's Portfolio</title>
+
+    <link rel="stylesheet" href="/work/detailed_work.css">
+    <link rel="stylesheet" href="/root/root.css">
+</head>
+<body class="work-page">
+    <header id="header-container"></header>
+
+    <main>
+        <h1>Minefia TaskXP iPhone Ver</h1>
+
+        <section class="images-section">
+            <button class="prev">&#10094;</button>
+            <div class="images-container" data-project="task_xp_iphone"></div>
+            <button class="next">&#10095;</button>
+        </section>
+
+        <section class="demo-container">
+            <h3 class="title">Demo / Links</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Platform: iPhone and iPad</li>
+                    <li>Project Status: Prototype</li>
+                    <li>GitHub: 
+                        <a href="https://github.com/EarthDaiki/Minefia-TaskXP-iPhone" target="_blank" class="link-text">
+                            View Repository
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="overview-container">
+            <h3 class="title">Overview</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Task-XP is a native task-management app for iPhone and iPad.</li>
+                    <li>It combines structured task planning, time tracking, calendar-based navigation, progress summaries, local reminders, and optional AI-assisted task creation.</li>
+                    <li>The app is built with SwiftUI and stores task data locally in SQLite.</li>
+                    <li>An OpenAI API key is only required for AI-assisted task generation; core task management works offline without one.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="key-features-container">
+            <h3 class="title">Key Features</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Create, edit, complete, reopen, and delete tasks with descriptions, due dates, due times, priorities, difficulty levels, estimated durations, and tags.</li>
+                    <li>Filter tasks by Inbox, Today, Upcoming, Completed, or Tag, and sort by creation date, due date, priority, or difficulty.</li>
+                    <li>Browse scheduled tasks in a calendar and daily timeline.</li>
+                    <li>Start and stop work sessions while recording actual time spent.</li>
+                    <li>Review running, overdue, and today's tasks on the Home screen.</li>
+                    <li>View completion progress with Swift Charts.</li>
+                    <li>Generate structured task details from natural-language prompts with the OpenAI Responses API.</li>
+                    <li>Schedule local reminders for tasks with due dates.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="tech-stack-container">
+            <h3 class="title">Tech Stack</h3>
+            <div class="text-section">
+                <ul>
+                    <li><strong>UI:</strong> SwiftUI with UIKit integration</li>
+                    <li><strong>State Management:</strong> Observation-based stores</li>
+                    <li><strong>Charts:</strong> Swift Charts</li>
+                    <li><strong>Persistence:</strong> SQLite3</li>
+                    <li><strong>Credentials:</strong> Security framework and Keychain Services</li>
+                    <li><strong>Notifications:</strong> UserNotifications framework</li>
+                    <li><strong>AI Integration:</strong> OpenAI Responses API with JSON Schema structured output</li>
+                    <li><strong>Platforms:</strong> iOS and iPadOS</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="architecture-container">
+            <h3 class="title">Architecture / Workflow</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h3>App Structure:</h3>
+                    <ul>
+                        <li>SwiftUI views use task, task-list, and tag stores for application state.</li>
+                        <li>Stores read and write task and tag records through a local SQLite database.</li>
+                        <li>OpenAI, Keychain, and local-notification operations are handled by separate managers.</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>AI Task Creation:</h3>
+                    <ul>
+                        <li>The user configures an OpenAI API key and model in Settings.</li>
+                        <li>A natural-language prompt is sent to the OpenAI Responses API when the user requests AI generation.</li>
+                        <li>Structured task details are generated for the user to review before saving.</li>
+                    </ul>
+                </div>
+                <div class="element">
+                    <h3>Privacy &amp; Storage:</h3>
+                    <ul>
+                        <li>Tasks and tags remain in the on-device SQLite database.</li>
+                        <li>OpenAI API keys are stored in the system Keychain and are configured not to migrate to another device.</li>
+                        <li>Task prompts are sent to OpenAI only when the user explicitly requests AI task generation.</li>
+                        <li>The app does not include user accounts, cloud backup, or cross-device synchronization.</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="challenges-container">
+            <h3 class="title">Challenges &amp; Solutions</h3>
+            <div class="text-section">
+                <div class="element">
+                    <h4>① Keeping task management local-first</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>Task planning and progress tracking need to remain available without requiring an account or network connection.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Store tasks and tags locally in SQLite, keeping core task-management features independent from the optional AI service.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>② Protecting API credentials</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>AI-assisted task creation requires an API key, which should not be stored with ordinary task data.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Use Keychain Services for API key storage, with device-only accessibility.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="element">
+                    <h4>③ Making reminders respect user settings</h4>
+                    <div class="child-element">
+                        <h4>Challenge:</h4>
+                        <ul>
+                            <li>Reminder delivery depends on operating-system notification permission and device settings.</li>
+                        </ul>
+                    </div>
+                    <div class="child-element">
+                        <h4>Approach:</h4>
+                        <ul>
+                            <li>Request notification permission when scheduling is first attempted and keep task management usable if permission is denied.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-line">
+        </section>
+
+        <section class="result-container">
+            <h3 class="title">Result / Outcome</h3>
+            <div class="text-section">
+                <ul>
+                    <li>Built a local-first native task-management prototype for iPhone and iPad.</li>
+                    <li>The app brings task organization, calendar navigation, time tracking, progress summaries, and local reminders into one workflow.</li>
+                    <li>AI-assisted task creation is available as an optional feature and requires an OpenAI API key.</li>
+                    <li>The current project targets Swift 5 language mode and requires iOS or iPadOS 26.5 or later.</li>
+                </ul>
+            </div>
+            <hr class="border-line">
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Daiki's Portfolio</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="image-wrapper">
+            <img id="modal-img">
+            <button type="button" class="closeBtn">&times;</button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <script src="/root/header.js"></script>
+    <script src="/work/detailed_work.js"></script>
+</body>
+</html>
