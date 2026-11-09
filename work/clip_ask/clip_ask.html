@@ -37,7 +37,6 @@
                             View Repository
                         </a>
                     </li>
-                    <li>Demo Video: STILL WORKING ON IT.</li>
                 </ul>
             </div>
             <hr class="border-line">
@@ -63,7 +62,7 @@
                     <li>Image or screen-area analysis using crop mode</li>
                     <li>Bottom overlay UI for displaying answers without leaving the page</li>
                     <li>Optional Chat Mode for keeping conversation context per domain</li>
-                    <li>Optional Summary Mode to reduce token usage and API cost</li>
+                    <li>Optional Summary Mode that summarizes conversation history before the next request after the configured message count is reached</li>
                     <li>Domain-based memory management from the Memory tab</li>
                     <li>Local settings storage using Chrome storage</li>
                 </ul>
@@ -93,11 +92,11 @@
                 <div class="element">
                     <h3>Model Selection Flow:</h3>
                     <ul>
-                        <li>User enters an OpenAI API Key in the Options page</li>
-                        <li>The extension fetches available models from the OpenAI API</li>
-                        <li>Unsupported models such as image generation, audio, realtime, transcription, and text-to-speech models are filtered out internally</li>
-                        <li>Only usable models are shown in the model dropdowns</li>
-                        <li>The selected model is used for text, cropped image, or summary requests</li>
+                        <li>User enters an OpenAI API key in the Options page and saves it to validate the key and fetch available models</li>
+                        <li>The extension shows available curated text, image, and summary models in separate configured orders</li>
+                        <li>If none of the curated models for a use are available, the dropdown falls back to available GPT-5 and GPT-6 models</li>
+                        <li>No model is selected automatically; users choose text, image, and summary models separately</li>
+                        <li>The selected model is used for its corresponding text, cropped-image, or summary requests</li>
                     </ul>
                 </div>
                 <div class="element">
@@ -126,8 +125,8 @@
                     <h3>Chat Mode Flow:</h3>
                     <ul>
                         <li>Conversation history is organized by website domain</li>
-                        <li>The extension stores the previous response ID for each domain</li>
-                        <li>Follow-up requests can continue the same conversation context</li>
+                        <li>The extension stores a conversation ID for each domain</li>
+                        <li>Follow-up requests send the saved conversation ID as <code>previous_response_id</code> to continue context</li>
                         <li>Chat Mode can be turned on or off in Settings</li>
                     </ul>
                 </div>
@@ -136,9 +135,9 @@
                     <h3>Summary Mode Flow:</h3>
                     <ul>
                         <li>Summary Mode works when Chat Mode is enabled</li>
-                        <li>After a set number of messages, the conversation is summarized</li>
-                        <li>The conversation ID is reset</li>
-                        <li>The summary is reused as compact context for future messages</li>
+                        <li>When the configured message count is reached, the next text or image request first generates a summary of the conversation</li>
+                        <li>The conversation ID is reset after summarization</li>
+                        <li>The summary is sent as compact context with the new request</li>
                     </ul>
                 </div>
             </div>
@@ -161,9 +160,19 @@
                 </ul>
 
                 <p>
-                    The extension fetches available models from the OpenAI API and internally filters the list before showing it in the model dropdowns.
-                    Models that are not useful for this extension, such as image generation, audio, realtime, transcription, or text-to-speech models, are not displayed.
-                    This helps users choose only models that can be used for highlighted text requests, cropped image analysis, and summarization.
+                    Text and summary model choices are ordered as GPT-6 Luna (recommended), GPT-6.1 Terra (balanced), and GPT-6.1 Sol (advanced).
+                    Image choices are ordered as GPT-6.1 Terra (recommended), GPT-6 Luna (budget), and GPT-6.1 Sol (advanced).
+                    If no curated option is available for a dropdown, available GPT-5 and GPT-6 models are used as fallbacks.
+                    Models are selected separately for each use, and none is selected automatically.
+                </p>
+
+                <p>
+                    Initial settings are Chat Mode off, Summary Mode on, a 500-token output limit, and a summary frequency of 30 messages.
+                    Summary Mode only takes effect while Chat Mode is enabled.
+                </p>
+
+                <p>
+                    The extension fetches models available to the supplied API key and presents curated choices for text, image, and summary tasks.
                 </p>
 
                 <p>
@@ -205,7 +214,7 @@
                 <ul>
                     <li><strong>Manifest Version:</strong> 3</li>
                     <li><strong>Name:</strong> ClipAsk: Highlight Text & Ask ChatGPT</li>
-                    <li><strong>Version:</strong> 1.1.1</li>
+                    <li><strong>Version:</strong> 1.2.0</li>
                     <li><strong>Description:</strong> Highlight or crop anything and ask AI instantly!</li>
                     <li><strong>Background:</strong> background.js service worker</li>
                     <li><strong>Options Page:</strong> options.html</li>
