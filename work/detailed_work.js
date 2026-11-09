@@ -96,6 +96,12 @@ const videoSets = {
             "task_xp.mp4",
         ]
     },
+    clipask: {
+        basePath: "/videos/",
+        files: [
+            "clip_ask_ai.mp4",
+        ]
+    }
 }
 
 const modal = document.getElementById("modal");
